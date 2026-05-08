@@ -26,6 +26,64 @@
 .progressFill { height: 100%; background: var(--known); transition: width 0.4s; }
 .progressLabel { font-size: 0.62rem; color: #7a6f60; letter-spacing: 0.05em; }
 
+/* Passport stamps — fluency level chips */
+.stamps {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  animation: fadeUp 0.3s 0.04s ease both;
+}
+
+.stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 14px 8px;
+  background: var(--stamp-bg, var(--paper));
+  border: 2px dashed var(--stamp-color, var(--rule));
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.18s;
+  min-width: 110px;
+  position: relative;
+  font-family: var(--font-mono);
+}
+.stamp:hover {
+  transform: translateY(-1px) rotate(-0.5deg);
+  box-shadow: 2px 2px 0 var(--stamp-color, var(--rule));
+}
+.stampActive {
+  border-style: solid;
+  background: var(--stamp-color, var(--accent)) !important;
+  color: white !important;
+  transform: rotate(-0.5deg);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.stampActive .stampName,
+.stampActive .stampCount,
+.stampActive .stampIcon {
+  color: white !important;
+}
+.stampIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.stampName {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--stamp-color, var(--ink));
+  font-weight: 500;
+}
+.stampCount {
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: var(--stamp-color, #7a6f60);
+  opacity: 0.85;
+}
+
 .controls {
   display: flex;
   gap: 10px;
@@ -33,6 +91,42 @@
   flex-wrap: wrap;
   animation: fadeUp 0.3s 0.05s ease both;
 }
+
+.levelTag {
+  display: inline-block;
+  margin-left: 12px;
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--cream);
+  color: #5a4e3e;
+  border: 1px solid var(--rule);
+}
+
+.lvDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  align-self: center;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.6);
+}
+
+.exLevel {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+}
+.exLevel span:first-child { font-weight: 600; }
+.exLevelDesc { color: #7a6f60; }
 
 .search {
   flex: 1;
@@ -222,4 +316,6 @@
   .notebookBody { grid-template-columns: 32px 1fr; }
   .notebookHeader { padding-left: 44px; }
   .search { min-width: 100%; }
+  .stamp { min-width: 90px; padding: 8px 10px; }
+  .stampName { font-size: 0.75rem; }
 }

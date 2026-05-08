@@ -4,6 +4,7 @@ import { useWordMarks } from '../lib/useWordMarks'
 import { useQuiz } from '../lib/useQuiz'
 import { getAllWords } from '../lib/srs'
 import { data } from '../data/vocabulary'
+import { LEVELS, passport } from '../lib/levels'
 import styles from './Dashboard.module.css'
 
 export default function Dashboard() {
@@ -21,6 +22,9 @@ export default function Dashboard() {
 
   const email = user?.email || ''
   const name = email.split('@')[0]
+
+  // Passport: stamps unlock as known-word count crosses thresholds
+  const pp = passport(knownCount)
 
   return (
     <main className={styles.main}>
@@ -45,6 +49,51 @@ export default function Dashboard() {
               ? 'Come back tomorrow for more'
               : 'Takes about ' + Math.ceil(dueCount * 0.5) + ' minutes'}
           </p>
+        </div>
+      </div>
+
+      {/* French passport */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Your French passport</h2>
+        <div className={styles.passportCard}>
+          <div className={styles.passportHeader}>
+            <div>
+              <p className={styles.passportEyebrow}>
+                {pp.currentLevel
+                  ? <>You've reached <strong>{pp.currentLevel.icon} {pp.currentLevel.name}</strong></>
+                  : <>Start your French journey</>}
+              </p>
+              <p className={styles.passportSub}>
+                {pp.next
+                  ? <>Next stamp: <strong>{pp.next.icon} {pp.next.name}</strong> at {pp.next.threshold} words</>
+                  : <>You've collected every stamp — c'est magnifique!</>}
+              </p>
+            </div>
+            {pp.next && (
+              <div className={styles.passportProgress}>
+                <span className={styles.passportPct}>{pp.progressToNext}%</span>
+                <span className={styles.passportPctLabel}>to next</span>
+              </div>
+            )}
+          </div>
+          <div className={styles.stampsRow}>
+            {LEVELS.map(lv => {
+              const reached = knownCount >= lv.threshold
+              const passed = reached
+              return (
+                <div
+                  key={lv.n}
+                  className={`${styles.passportStamp} ${passed ? styles.passportStampReached : ''}`}
+                  style={{ '--stamp-color': lv.color, '--stamp-bg': lv.bgColor }}
+                >
+                  <span className={styles.passportIcon}>{lv.icon}</span>
+                  <span className={styles.passportName}>{lv.name}</span>
+                  <span className={styles.passportThresh}>{lv.threshold}</span>
+                  <span className={styles.passportBlurb}>{lv.blurb}</span>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
 
@@ -73,7 +122,7 @@ export default function Dashboard() {
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Study</h2>
         <div className={styles.links}>
-          <QuickLink to="/vocabulary" icon="📖" title="Browse vocabulary" sub="All 1,860 words, searchable and filterable" />
+          <QuickLink to="/vocabulary" icon="📖" title="Browse vocabulary" sub={`${allWords.length.toLocaleString()} words, filter by fluency level`} />
           <QuickLink to="/tenses" icon="⏱" title="Verb tenses" sub="9 tenses with conjugation tables and examples" />
           <QuickLink to="/quiz" icon="🃏" title="Quiz mode" sub="Flashcards with spaced repetition" />
         </div>
