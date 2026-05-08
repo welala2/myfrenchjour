@@ -1,0 +1,208 @@
+.main { min-height: 100vh; }
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px 60px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+}
+
+.heroInner { animation: fadeUp 0.5s ease both; }
+
+.eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 16px;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.headline em { font-style: italic; color: var(--red); }
+
+.sub {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: #5a4e3e;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.ctaPrimary {
+  padding: 12px 28px;
+  background: var(--red);
+  color: white;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.ctaPrimary:hover { opacity: 0.85; }
+
+.ctaSecondary {
+  padding: 12px 20px;
+  border: 1.5px solid var(--rule);
+  color: var(--ink);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  text-decoration: none;
+  background: var(--cream);
+  transition: all 0.15s;
+}
+.ctaSecondary:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Hero card */
+.heroCard {
+  animation: fadeUp 0.5s 0.15s ease both;
+}
+
+.cardInner {
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  border-left: 4px solid var(--accent);
+}
+
+.cardFr {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 2rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+.cardLine {
+  color: var(--rule);
+  margin-bottom: 6px;
+}
+
+.cardEn {
+  font-size: 0.9rem;
+  color: #5a4e3e;
+  margin-bottom: 20px;
+}
+
+.cardEx {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--accent);
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.cardExEn {
+  font-size: 0.72rem;
+  color: #7a6f60;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.cardBtns { display: flex; gap: 8px; }
+
+.cardBtnKnown {
+  padding: 6px 14px;
+  background: var(--known);
+  color: white;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius);
+  cursor: default;
+  font-family: var(--font-mono);
+}
+
+.cardBtnReview {
+  padding: 6px 14px;
+  background: var(--cream);
+  color: var(--review);
+  border: 1px solid var(--review);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius);
+  cursor: default;
+  font-family: var(--font-mono);
+}
+
+/* Stats */
+.stats {
+  background: var(--ink);
+  padding: 40px 24px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.stat { text-align: center; }
+.statN {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: var(--paper);
+  margin-bottom: 4px;
+}
+.statL {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(247,243,236,0.5);
+}
+
+/* Features */
+.features {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.feature {
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  box-shadow: 3px 3px 0 #b5ac9e;
+}
+
+.featureIcon { font-size: 1.5rem; display: block; margin-bottom: 12px; }
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+.featureBody { font-size: 0.76rem; color: #5a4e3e; line-height: 1.7; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: #7a6f60;
+  text-transform: uppercase;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px 40px; }
+  .heroCard { order: -1; }
+  .stats { gap: 32px; }
+}

@@ -1,0 +1,176 @@
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.greeting { animation: fadeUp 0.3s ease; }
+.greetingLabel {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #7a6f60;
+  margin-bottom: 4px;
+}
+.greetingName {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2rem, 6vw, 3rem);
+  color: var(--ink);
+}
+
+/* Today card */
+.todayCard {
+  background: var(--ink);
+  border-radius: var(--radius);
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  animation: fadeUp 0.3s 0.05s ease both;
+  box-shadow: var(--shadow);
+}
+
+.todayLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,243,236,0.5);
+  margin-bottom: 8px;
+}
+
+.todayN {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  color: var(--paper);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.todaySub {
+  font-size: 0.65rem;
+  color: rgba(247,243,236,0.5);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.todayRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.startBtn {
+  padding: 12px 24px;
+  background: var(--red);
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: opacity 0.15s;
+  white-space: nowrap;
+}
+.startBtn:hover { opacity: 0.85; }
+
+.todayNote {
+  font-size: 0.62rem;
+  color: rgba(247,243,236,0.4);
+  letter-spacing: 0.05em;
+}
+
+/* Sections */
+.section { animation: fadeUp 0.3s 0.1s ease both; }
+.sectionTitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--ink);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Stats grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.statCard {
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  box-shadow: 2px 2px 0 #b5ac9e;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.statN {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+.statL { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #7a6f60; }
+
+/* Progress */
+.progressWrap { }
+.progressBar {
+  position: relative;
+  height: 8px;
+  background: var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.progressFill { height: 100%; background: var(--known); transition: width 0.5s; }
+.progressReview {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: var(--review);
+  transition: all 0.5s;
+}
+.progressLabel { font-size: 0.62rem; color: #7a6f60; letter-spacing: 0.05em; }
+
+/* Quick links */
+.links { display: flex; flex-direction: column; gap: 8px; }
+.quickLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  text-decoration: none;
+  box-shadow: 2px 2px 0 #b5ac9e;
+  transition: transform 0.1s, box-shadow 0.1s;
+  border-left: 3px solid transparent;
+}
+.quickLink:hover {
+  transform: translateX(3px);
+  border-left-color: var(--accent);
+}
+
+.qlIcon { font-size: 1.3rem; flex-shrink: 0; }
+.qlTitle { font-size: 0.82rem; color: var(--ink); margin-bottom: 3px; }
+.qlSub { font-size: 0.68rem; color: #7a6f60; }
+.qlArrow { margin-left: auto; color: var(--rule); font-size: 1rem; flex-shrink: 0; transition: color 0.15s; }
+.quickLink:hover .qlArrow { color: var(--accent); }
+
+@media (max-width: 540px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .todayCard { flex-direction: column; align-items: flex-start; }
+  .todayRight { align-items: flex-start; }
+}
