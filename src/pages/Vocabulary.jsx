@@ -39,7 +39,9 @@ export default function Vocabulary() {
   const [cat, setCat] = useState('all')
   const [level, setLevel] = useState(0)
   const [search, setSearch] = useState('')
-  const [hideKnown, setHideKnown] = useState(false)
+  const [showKnown, setShowKnown] = useState(true)
+  const [showReview, setShowReview] = useState(true)
+  const [showUnmarked, setShowUnmarked] = useState(true)
   const [expandedKey, setExpandedKey] = useState(null)
 
   const allWords = useMemo(() => getAllWords(data), [])
@@ -87,12 +89,18 @@ export default function Vocabulary() {
       )
     }
 
-    if (hideKnown) {
-      words = words.filter(w => getMark(w.f) !== 'known')
+    // Status filter (Known / Review / Unmarked)
+    if (user && !(showKnown && showReview && showUnmarked)) {
+      words = words.filter(w => {
+        const mk = getMark(w.f)
+        if (mk === 'known')  return showKnown
+        if (mk === 'review') return showReview
+        return showUnmarked
+      })
     }
 
     return words
-  }, [cat, level, search, hideKnown, marks, allWords])
+  }, [cat, level, search, showKnown, showReview, showUnmarked, marks, allWords, user])
 
   const grouped = useMemo(() => {
     if (search || cat === 'yours') return [{ label: null, words: filtered }]
@@ -173,16 +181,31 @@ export default function Vocabulary() {
           value={search}
           onChange={e => setSearch(e.target.value)}
         />
-        <div className={styles.filterBtns}>
-          {user && (
+        {user && (
+          <div className={styles.statusChips}>
             <button
-              className={`${styles.filterBtn} ${hideKnown ? styles.active : ''}`}
-              onClick={() => setHideKnown(h => !h)}
+              className={`${styles.statusChip} ${styles.statusKnown} ${showKnown ? styles.statusOn : ''}`}
+              onClick={() => setShowKnown(s => !s)}
+              title={showKnown ? 'Hide known words' : 'Show known words'}
             >
-              {hideKnown ? '👁 Showing unknown' : '👁 Hide known'}
+              {showKnown ? '✓' : '○'} Known
             </button>
-          )}
-        </div>
+            <button
+              className={`${styles.statusChip} ${styles.statusReview} ${showReview ? styles.statusOn : ''}`}
+              onClick={() => setShowReview(s => !s)}
+              title={showReview ? 'Hide review words' : 'Show review words'}
+            >
+              {showReview ? '★' : '○'} Review
+            </button>
+            <button
+              className={`${styles.statusChip} ${styles.statusUnmarked} ${showUnmarked ? styles.statusOn : ''}`}
+              onClick={() => setShowUnmarked(s => !s)}
+              title={showUnmarked ? 'Hide unmarked words' : 'Show unmarked words'}
+            >
+              {showUnmarked ? '·' : '○'} Unmarked
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.tabs}>

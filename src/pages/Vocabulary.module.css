@@ -143,22 +143,49 @@
 .search:focus { border-color: var(--accent); }
 .search::placeholder { color: #b0a696; }
 
-.filterBtns { display: flex; gap: 8px; }
-.filterBtn {
-  padding: 8px 14px;
+/* Status filter chips (Known / Review / Unmarked) */
+.statusChips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.statusChip {
+  padding: 7px 12px;
   border: 1.5px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--cream);
+  border-radius: 18px;
+  background: var(--paper);
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  letter-spacing: 0.08em;
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #5a4e3e;
+  color: #aa9f8e;
   cursor: pointer;
   transition: all 0.15s;
+  opacity: 0.55;
+  filter: grayscale(50%);
 }
-.filterBtn:hover { border-color: var(--known); }
-.active { background: var(--known) !important; border-color: var(--known) !important; color: white !important; }
+.statusChip:hover { opacity: 0.85; }
+.statusKnown.statusOn {
+  background: var(--known);
+  border-color: var(--known);
+  color: white;
+  opacity: 1;
+  filter: none;
+}
+.statusReview.statusOn {
+  background: var(--review);
+  border-color: var(--review);
+  color: white;
+  opacity: 1;
+  filter: none;
+}
+.statusUnmarked.statusOn {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  opacity: 1;
+  filter: none;
+}
 
 /* Tabs */
 .tabs {
