@@ -6,6 +6,12 @@ import { getAllWords } from '../lib/srs'
 import { LEVELS, levelByN } from '../lib/levels'
 import styles from './Vocabulary.module.css'
 
+// Normalize text for accent-insensitive search:
+// "réussir" → "reussir", "Élève" → "eleve"
+function fold(s) {
+  return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+}
+
 const CATS = [
   { key: 'all', label: 'All' },
   { key: 'nouns', label: 'Nouns' },
@@ -80,12 +86,12 @@ export default function Vocabulary() {
     }
 
     if (search) {
-      const q = search.toLowerCase()
+      const q = fold(search)
       words = words.filter(w =>
-        w.f.toLowerCase().includes(q) ||
-        w.e.toLowerCase().includes(q) ||
-        (w.fr && w.fr.toLowerCase().includes(q)) ||
-        (w.en && w.en.toLowerCase().includes(q))
+        fold(w.f).includes(q) ||
+        fold(w.e).includes(q) ||
+        (w.fr && fold(w.fr).includes(q)) ||
+        (w.en && fold(w.en).includes(q))
       )
     }
 
